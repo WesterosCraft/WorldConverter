@@ -13,6 +13,7 @@ public enum MinecraftVersion implements Version {
     V1_12(new V1_12()),
     V1_14(new V1_14()),
     V1_15(new V1_15()),
+    V1_16(new V1_16()),
     ;
 
     private final Version version;
