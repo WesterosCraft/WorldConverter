@@ -11,8 +11,10 @@ import me.dags.scraper.v1_16.Mappings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.Property;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -33,7 +35,7 @@ public class Scraper {
 
     @SubscribeEvent
     public static void generate(FMLCommonSetupEvent event) {
-        Schema schema = Schema.modern("1.15");
+        Schema schema = Schema.modern("1.16");
         try (GameDataWriter writer = new GameDataWriter(schema)) {
             try (SectionWriter<BlockData> section = writer.startBlocks()){
                 for (Block block : ForgeRegistries.BLOCKS) {
@@ -53,7 +55,8 @@ public class Scraper {
     }
 
     private static BiomeData geBiomeData(Biome biome) {
-        return new BiomeData(biome.getRegistryName(), 0); // BUGBUG ForgeRegistries.BIOMES.getId(biome));
+    	int id = ((net.minecraftforge.registries.ForgeRegistry<Biome>)net.minecraftforge.registries.ForgeRegistries.BIOMES).getID(biome);
+        return new BiomeData(biome.getRegistryName(), id);
     }
 
     private static BlockData getBlockData(Block block) {

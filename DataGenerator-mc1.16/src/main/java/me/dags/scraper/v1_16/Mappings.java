@@ -26,10 +26,10 @@ public class Mappings {
                 return;
             }
             String version = root.getAsJsonObject().get("version").getAsString();
-            try (FileWriter writer = new FileWriter("blocks_" + version + "-1.15.txt")) {
+            try (FileWriter writer = new FileWriter("blocks_" + version + "-1.16.txt")) {
                 writeBlockMappings(root.getAsJsonObject().getAsJsonObject("blocks"), writer);
             }
-            try (FileWriter writer = new FileWriter("biomes_" + version + "-1.15.txt")) {
+            try (FileWriter writer = new FileWriter("biomes_" + version + "-1.16.txt")) {
                 writeBiomeMappings(root.getAsJsonObject().getAsJsonObject("biomes"), writer);
             }
         } catch (IOException e) {

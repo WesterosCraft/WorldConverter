@@ -62,7 +62,7 @@ public class ClientScraper {
             public String getBlockClass(BlockState state) {
                 return state.getBlock().getClass().getSimpleName();
             }
-        }.run("1.15");
+        }.run("1.16");
     }
 
     private static void iterateTextures(BlockState state, IBakedModel model, BiConsumer<String, Object> consumer) {
