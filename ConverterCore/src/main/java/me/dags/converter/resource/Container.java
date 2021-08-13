@@ -3,6 +3,7 @@ package me.dags.converter.resource;
 import me.dags.converter.resource.dir.DirContainer;
 import me.dags.converter.resource.jar.JarContainer;
 import me.dags.converter.util.IO;
+import me.dags.converter.util.log.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +46,7 @@ public interface Container extends AutoCloseable {
 
     static Container self(Class<?> source) throws IOException {
         URL location = source.getProtectionDomain().getCodeSource().getLocation();
+        Logger.log("self()=" + location + ", getPath=" + location.getPath());
         return open(location.getPath());
     }
 

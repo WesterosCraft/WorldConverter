@@ -47,7 +47,10 @@ public class IO {
     }
 
     public static Path toPath(String path) {
-        return Paths.get(unescape(path)).toAbsolutePath();
+    	Logger.log("toPath(" + path + ")");
+        Path p = Paths.get("/" + unescape(path));
+        Logger.log("toPath(" + path + ") = " + p);
+        return p;
     }
 
     public static InputStream open(String resource) {
