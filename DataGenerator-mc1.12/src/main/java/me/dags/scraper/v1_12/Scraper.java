@@ -77,7 +77,7 @@ public class Scraper {
         } catch (Exception x) {
         	System.out.println("Exception readong block state");
         }
-        return new BlockData(block.getRegistryName(), defaults,states);
+        return new BlockData(block.getRegistryName(), Block.getIdFromBlock(block), defaults, states);
     }
 
     private static StateData getStateData(IBlockState state) {
@@ -93,6 +93,6 @@ public class Scraper {
             }
             sb.append(p.getName()).append('=').append(state.getValue(p).toString().toLowerCase());
         };
-        return new StateData(sb.toString());
+        return new StateData(sb.toString(), state.getBlock().getMetaFromState(state));
     }
 }
