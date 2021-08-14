@@ -52,15 +52,24 @@ minecraft {
     runDir = 'run'
 }
 
-project.archivesBaseName = "DataGenerator-base-forge-1.12.2"
+//project.archivesBaseName = "DataGenerator-base-forge-1.12.2"
 
 shadowJar {
     dependencies {
         include(dependency(':ConverterCore'))
     }
-    archiveName = "DataGenerator-forge-1.12.2.jar"
     manifest {
-        attributes 'FMLAT': 'accesstransformer.cfg'
+        attributes([
+                "Specification-Title": "DataGenerator",
+                "Specification-Vendor": "DataGenerator",
+                "Specification-Version": "1", // We are version 1 of ourselves
+                "Implementation-Title": project.name,
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor" :"DataGenerator",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'FMLAT': 'accesstransformer.cfg'
+        ])
+        
     }
 }
 

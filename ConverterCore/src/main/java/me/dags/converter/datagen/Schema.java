@@ -3,6 +3,7 @@ package me.dags.converter.datagen;
 import me.dags.converter.datagen.biome.BiomeData;
 import me.dags.converter.datagen.biome.BiomeWriter;
 import me.dags.converter.datagen.block.BlockData;
+import me.dags.converter.datagen.block.BlockWriter;
 import me.dags.converter.datagen.block.BlockWriterLegacy;
 import me.dags.converter.datagen.writer.ValueWriter;
 
@@ -23,6 +24,6 @@ public class Schema {
     }
 
     public static Schema modern(String version) {
-        return new Schema(version, new BlockWriterLegacy(), new BiomeWriter());
+        return new Schema(version, new BlockWriter(), new BiomeWriter());
     }
 }
