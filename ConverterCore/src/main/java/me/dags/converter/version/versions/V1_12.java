@@ -22,6 +22,7 @@ public class V1_12 extends V1_10 {
         put("minecraft:acacia_door", new DoorExtender());
         put("minecraft:dark_oak_door", new DoorExtender());
 
+        
         put("conquest:door_oaknowindow", new DoorExtender());
         put("conquest:door_wood1", new DoorExtender());
         put("conquest:door_wood2", new DoorExtender());
@@ -41,6 +42,16 @@ public class V1_12 extends V1_10 {
         put("conquest:planks_redweathered_door", new DoorExtender());
         put("conquest:planks_whiteweathered_door", new DoorExtender());
         put("conquest:planks_orangepainted_door", new DoorExtender());
+        
+        put("westerosblocks:door_spruce", new DoorExtender());
+        put("westerosblocks:door_weirwood", new DoorExtender());
+        put("westerosblocks:door_secret_sandstone_red", new DoorExtender());
+        put("westerosblocks:door_locked_oak", new DoorExtender());
+        put("westerosblocks:door_locked_spruce", new DoorExtender());
+        put("westerosblocks:door_locked_birch", new DoorExtender());
+        put("westerosblocks:door_locked_jungle", new DoorExtender());
+        put("westerosblocks:door_locked_northern_wood", new DoorExtender());
+
     }};
 
     @Override

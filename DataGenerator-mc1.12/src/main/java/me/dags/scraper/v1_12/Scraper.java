@@ -7,6 +7,16 @@ import me.dags.converter.datagen.biome.BiomeData;
 import me.dags.converter.datagen.block.BlockData;
 import me.dags.converter.datagen.block.StateData;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockFire;
+import net.minecraft.block.BlockFlowerPot;
+import net.minecraft.block.BlockPane;
+import net.minecraft.block.BlockRedstoneWire;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +33,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import net.minecraftforge.fml.common.network.NetworkCheckHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid="data_generator")
 public class Scraper {
@@ -70,6 +83,20 @@ public class Scraper {
     private static BlockData getBlockData(Block block) {
         StateData defaults = getStateData(block.getDefaultState());
         List<StateData> states = new LinkedList<>();
+        boolean upgrade = false;
+        // Check if class of block we need to upgrade
+        if ((block instanceof BlockStairs) ||
+    		(block instanceof BlockWall) ||
+    		(block instanceof BlockFence) ||
+    		(block instanceof BlockPane) ||
+    		(block instanceof BlockFlowerPot) ||
+    		(block instanceof BlockDoublePlant) ||
+    		(block instanceof BlockFenceGate) ||
+    		(block instanceof BlockDoor) ||
+    		(block instanceof BlockFire) ||
+    		(block instanceof BlockRedstoneWire)){
+        	upgrade = true;
+        }
         try {
         BlockStateContainer sc = (BlockStateContainer) blockStateFld.get(block);
         for (IBlockState state : sc.getValidStates()) {
@@ -78,7 +105,7 @@ public class Scraper {
         } catch (Exception x) {
         	System.out.println("Exception readong block state");
         }
-        return new BlockData(block.getRegistryName(), Block.getIdFromBlock(block), defaults, states);
+        return new BlockData(block.getRegistryName(), Block.getIdFromBlock(block), upgrade, defaults, states);
     }
 
     private static StateData getStateData(IBlockState state) {
@@ -101,4 +128,9 @@ public class Scraper {
         };
         return new StateData(sb.toString(), state.getBlock().getMetaFromState(state));
     }
+    @net.minecraftforge.fml.common.network.NetworkCheckHandler
+    public boolean netCheckHandler(Map<String, String> mods, Side side) {
+        return true;
+    }
+
 }

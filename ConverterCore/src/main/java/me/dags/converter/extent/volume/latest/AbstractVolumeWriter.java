@@ -88,4 +88,10 @@ public abstract class AbstractVolumeWriter implements Volume.Writer {
         }
         return Nbt.tag(array.getArray());
     }
+    
+    @Override
+	public boolean isEmpty() {
+		return buffer == null;
+	}
+
 }

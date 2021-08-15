@@ -6,15 +6,20 @@ import me.dags.converter.datagen.SectionWriter;
 import me.dags.converter.datagen.biome.BiomeData;
 import me.dags.converter.datagen.block.BlockData;
 import me.dags.converter.datagen.block.StateData;
-import me.dags.converter.version.versions.MinecraftVersion;
-import me.dags.scraper.v1_16.Mappings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.block.FenceBlock;
+import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.FireBlock;
+import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.PaneBlock;
+import net.minecraft.block.RedstoneWireBlock;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.block.WallBlock;
 import net.minecraft.state.Property;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -62,10 +67,25 @@ public class Scraper {
     private static BlockData getBlockData(Block block) {
         StateData defaults = getStateData(block.defaultBlockState());
         List<StateData> states = new LinkedList<>();
+        boolean upgrade = false;
+        // Check if class of block we need to upgrade
+        if ((block instanceof StairsBlock) ||
+    		(block instanceof WallBlock) ||
+    		(block instanceof FenceBlock) ||
+    		(block instanceof PaneBlock) ||
+    		(block instanceof FlowerPotBlock) ||
+    		(block instanceof DoublePlantBlock) ||
+    		(block instanceof FenceGateBlock) ||
+    		(block instanceof DoorBlock) ||
+    		(block instanceof FireBlock) ||
+    		(block instanceof RedstoneWireBlock)){
+        	upgrade = true;
+        }
+
         for (BlockState state : block.getStateDefinition().getPossibleStates()) {
             states.add(getStateData(state));
         }
-        return new BlockData(block.getRegistryName(), defaults,states);
+        return new BlockData(block.getRegistryName(), 0, upgrade, defaults, states);
     }
 
     private static StateData getStateData(BlockState state) {
