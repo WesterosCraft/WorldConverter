@@ -1,6 +1,6 @@
 # A world folder, a folder containing schematic/structure files,
 # or an individual schematic/structure file
-file=/Users/michaelprimm/forge-1.12.2/world
+file=/Users/michaelprimm/forge-1.12.2/Westeros
 
 # The format and version of the world/schematic(s)/structure(s) [optional]
 input_format=world
