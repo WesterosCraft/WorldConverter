@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -43,7 +44,7 @@ public class Scraper {
         	System.err.println("Cannot find blockState in Block");
         }
 
-        Schema schema = Schema.modern("1.12");
+        Schema schema = Schema.legacy("1.12");
         try (GameDataWriter writer = new GameDataWriter(schema)) {
             try (SectionWriter<BlockData> section = writer.startBlocks()){
                 for (Block block : ForgeRegistries.BLOCKS) {
@@ -91,7 +92,12 @@ public class Scraper {
             if (sb.length() > 0) {
                 sb.append(',');
             }
-            sb.append(p.getName()).append('=').append(state.getValue(p).toString().toLowerCase());
+            Comparable<?> val = state.getValue(p);
+            String v = val.toString().toLowerCase();
+            if (val instanceof IStringSerializable) {
+            	v = ((IStringSerializable) val).getName();
+            }
+            sb.append(p.getName()).append('=').append(v);
         };
         return new StateData(sb.toString(), state.getBlock().getMetaFromState(state));
     }
