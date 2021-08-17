@@ -79,9 +79,4 @@ public abstract class AbstractLegacyVolumeWriter implements Volume.Writer {
     protected void setMetadata(int index, byte value, NibbleArray metas) {
         metas.setNibble(index, value);
     }
-    @Override
-	public boolean isEmpty() {
-		return false;
-	}
-
 }

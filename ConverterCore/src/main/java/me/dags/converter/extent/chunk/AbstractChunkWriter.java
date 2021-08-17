@@ -85,9 +85,7 @@ public abstract class AbstractChunkWriter implements Chunk.Writer {
     protected void addSections(List<CompoundTag> list) {
         for (int i = 0; i <= top; i++) {
             Volume.Writer section = sections[i];
-            if ((section != null) && (!section.isEmpty())) {
-                list.add(section.flush());
-            }
+            list.add(section.flush());
         }
     }
 

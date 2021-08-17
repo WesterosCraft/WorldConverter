@@ -42,6 +42,5 @@ public interface Volume {
     }
 
     interface Writer extends Volume, BlockWriter, DataWriter, Extent.Writer {
-    	public boolean isEmpty();
     }
 }

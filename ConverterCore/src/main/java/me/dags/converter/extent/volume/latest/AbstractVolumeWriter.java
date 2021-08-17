@@ -30,6 +30,7 @@ public abstract class AbstractVolumeWriter implements Volume.Writer {
         this.width = width;
         this.height= height;
         this.length = length;
+        this.setState(0, 0, 0, BlockState.AIR);
     }
 
     @Override
@@ -88,10 +89,4 @@ public abstract class AbstractVolumeWriter implements Volume.Writer {
         }
         return Nbt.tag(array.getArray());
     }
-    
-    @Override
-	public boolean isEmpty() {
-		return buffer == null;
-	}
-
 }

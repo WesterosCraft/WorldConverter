@@ -7,12 +7,14 @@ import me.dags.converter.extent.volume.Volume;
 import me.dags.converter.extent.volume.latest.AbstractVolumeReader;
 import me.dags.converter.util.log.Logger;
 
+import org.jnbt.ByteArrayTag;
 import org.jnbt.CompoundTag;
 import org.jnbt.ListTag;
 import org.jnbt.Nbt;
 import org.jnbt.Tag;
 import org.jnbt.TagType;
 
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractChunkReader implements Chunk.Reader {
@@ -26,13 +28,7 @@ public abstract class AbstractChunkReader implements Chunk.Reader {
         this.level = root.getCompound("Level");
         this.tileEntityMap = new LazyTileEntityMap(level);
         this.sectionData = level.getListTag("Sections", TagType.COMPOUND).getBacking();
-        int maxy = -1;
-        // Don't assume packed
-        for (Tag<CompoundTag> s : this.sectionData) {
-        	int y = s.asCompound().getByteTag("Y").getValue();
-        	maxy = Math.max(maxy, (int) y);
-        }
-        this.sections = new Volume.Reader[maxy+2];	// Include room for y=-1
+        this.sections = new Volume.Reader[17];	// Include room for y=-1
     }
 
     @Override
@@ -47,26 +43,26 @@ public abstract class AbstractChunkReader implements Chunk.Reader {
 
     @Override
     public Volume.Reader getSection(int index) throws Exception {
-        Volume.Reader reader = sections[index+1];
-        if (reader == null) {
-        	// Find the right section, since may not be packed
-        	CompoundTag match = null;
-            for (Tag<CompoundTag> s : this.sectionData) {
-            	int y = s.asCompound().getByteTag("Y").getValue();
-            	if (y == index) {
-            		match = s.asCompound();;
-            		break;
-            	}
-            }
-            if (match != null) {
-            	reader = createSection(match);
-            }
-            else {
-            	reader = new EmptySection();
-            }
-        	sections[index+1] = reader;
-        }
-        return reader;
+    	Volume.Reader section = sections[index+1];
+    	if (section == null) {
+	    	// Initialize all section readers
+	        for (int i = 0; i < this.sections.length; i++) {
+	        	this.sections[i] = new EmptySection();
+	        }
+	        // Don't assume packed
+	        for (Tag<CompoundTag> s : this.sectionData) {
+	        	CompoundTag sec = s.asCompound();
+	        	int y = sec.getByteTag("Y").getValue();
+	        	if ((y < -1) || (y >= 16)) continue;
+	        	try {
+	        		this.sections[y+1] = createSection(sec);
+	        	} catch (Exception x) {
+	        		Logger.log("Error handling section of chunk", x);
+	        	}
+	        }
+	        section = sections[index+1];
+    	}
+    	return section;
     }
 
     @Override
@@ -100,8 +96,18 @@ public abstract class AbstractChunkReader implements Chunk.Reader {
 			return BlockState.AIR;
 		}
 
+		private static byte[] emptylight = new byte[2048];
+		private static byte[] emptysky;
 		@Override
 		public Tag<?> getData(String key) {
+			if (key.equals("BlockLight")) {
+				return Nbt.tag(emptylight);
+			}
+			else if (key.equals("SkyLight")) {
+				if (emptysky == null) { emptysky = new byte[2048]; Arrays.fill(emptysky, (byte)0xFF); }
+				return Nbt.tag(emptylight);				
+			}
+			Logger.log("EmptySection.getData(" + key + ")");
 			return Nbt.list(TagType.COMPOUND, (Iterable<CompoundTag>) null);
 		}
     }

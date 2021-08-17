@@ -4,6 +4,8 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.extent.chunk.AbstractChunkReader;
 import me.dags.converter.extent.volume.Volume;
 import me.dags.converter.registry.Registry;
+import me.dags.converter.util.log.Logger;
+
 import org.jnbt.CompoundTag;
 
 public class LegacyChunkReader extends AbstractChunkReader {
