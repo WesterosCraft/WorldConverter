@@ -149,7 +149,7 @@ minecraft:dispenser[facing=north,triggered=true] -> minecraft:dispenser[facing=n
 minecraft:dispenser[facing=south,triggered=true] -> minecraft:dispenser[facing=south,triggered=true]
 minecraft:dispenser[facing=west,triggered=true] -> minecraft:dispenser[facing=west,triggered=true]
 minecraft:dispenser[facing=east,triggered=true] -> minecraft:dispenser[facing=east,triggered=true]
-minecraft:sandstone[type=sandstone] -> minecraft:sandstone
+minecraft:sandstone[type=sandstone] -> westerosblocks:sandstone[east=false,north=false,south=false,west=false]
 minecraft:sandstone[type=chiseled_sandstone] -> minecraft:chiseled_sandstone
 minecraft:sandstone[type=smooth_sandstone] -> minecraft:cut_sandstone
 minecraft:noteblock -> minecraft:note_block[instrument=harp,note=0,powered=false]
@@ -295,7 +295,7 @@ minecraft:stone_slab[half=top,variant=quartz] -> minecraft:quartz_slab[type=top,
 minecraft:brick_block -> minecraft:bricks
 minecraft:tnt[explode=false] -> minecraft:tnt[unstable=false]
 minecraft:tnt[explode=true] -> minecraft:tnt[unstable=true]
-minecraft:bookshelf -> minecraft:bookshelf
+minecraft:bookshelf -> westerosblocks:bookshelf[north=false,south=false,east=false,west=false]
 minecraft:mossy_cobblestone -> minecraft:mossy_cobblestone
 minecraft:obsidian -> minecraft:obsidian
 minecraft:torch[facing=east] -> minecraft:wall_torch[facing=east]
