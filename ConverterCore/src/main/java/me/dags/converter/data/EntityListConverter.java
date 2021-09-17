@@ -58,7 +58,9 @@ public class EntityListConverter implements DataConverter {
                     data = converter.convert(data);
                 }
             }
-            dataList.add(data);
+            if (data != null) {	// Allow for stripping of entities by converter
+            	dataList.add(data);
+            }
         }
 
         if (dataList.isEmpty()) {

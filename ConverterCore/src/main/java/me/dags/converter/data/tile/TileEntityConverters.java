@@ -9,6 +9,7 @@ import me.dags.converter.data.tile.chisel.ChiselTileLegacy;
 import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.util.log.Logger;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,4 +32,13 @@ public class TileEntityConverters {
                 .writer(ChiselTileLegacy::new)
                 .build();
     }
+
+    // Get converters for 1.15+
+    public static DataConverter getNewConverters(RemappingRegistry<BlockState> registry) {
+    	List<EntityConverter> list = new ArrayList<EntityConverter>();
+    	list.add(new ObsoleteTileConverter("minecraft:flower_pot"));
+    	list.add(new ObsoleteTileConverter("minecraft:noteblock"));
+    	return new EntityListConverter("TileEntities", list);
+    }
+
 }
