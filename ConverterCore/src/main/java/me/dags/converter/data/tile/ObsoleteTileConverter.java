@@ -18,6 +18,7 @@ public class ObsoleteTileConverter implements EntityConverter {
 
 	@Override
 	public CompoundTag convert(CompoundTag data) {
+		System.out.println("convert(" + data.toString() + ")");
 		return null;
 	}
 }

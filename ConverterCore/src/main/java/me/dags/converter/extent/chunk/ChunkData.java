@@ -61,7 +61,9 @@ public class ChunkData {
         if (to.getVersion().equals("1.15") || to.getVersion().equals("1.16")) {
         	list.add(TileEntityConverters.getNewConverters(data.blocks));
         }
-        list.add(DataConverter.create("TileEntities", "TileEntities"));
+        else {
+        	list.add(DataConverter.create("TileEntities", "TileEntities"));
+        }
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
         list.add(DataConverter.create("LastUpdate", "LastUpdate"));
         list.add(DataConverter.create("LightPopulated", "isLightOn"));
