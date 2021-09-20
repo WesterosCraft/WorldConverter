@@ -56,12 +56,13 @@ public class ChunkData {
     private static List<DataConverter> upgradeFromLegacy(long seed, Version from, Version to, ConverterData data) {
     	System.out.println("upgradeFromLegacy(" + seed + "," + from + "," + to + ")");
         List<DataConverter> list = new LinkedList<>();
-        list.add(EntityConverters.getDataConverter());
         // Need to drop flower pots?
         if (to.getVersion().equals("1.15") || to.getVersion().equals("1.16")) {
+            list.add(EntityConverters.getNewDataConverter(data.blocks));
         	list.add(TileEntityConverters.getNewConverters(data.blocks));
         }
         else {
+            list.add(EntityConverters.getDataConverter());
         	list.add(DataConverter.create("TileEntities", "TileEntities"));
         }
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
