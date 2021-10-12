@@ -759,7 +759,7 @@ minecraft:stone_brick_stairs[facing=west,half=top,shape=straight] -> minecraft:s
 minecraft:stone_brick_stairs[facing=south,half=top,shape=straight] -> minecraft:stone_brick_stairs[facing=south,half=top,shape=straight,waterlogged=false]
 minecraft:stone_brick_stairs[facing=north,half=top,shape=straight] -> minecraft:stone_brick_stairs[facing=north,half=top,shape=straight,waterlogged=false]
 minecraft:mycelium[snowy=false] -> minecraft:mycelium[snowy=false]
-minecraft:waterlily -> minecraft:lily_pad
+minecraft:waterlily -> westerosblocks:lily_pad[cond=default,waterlogged=false]
 minecraft:nether_brick -> minecraft:nether_bricks
 minecraft:nether_brick_fence[east=false,north=false,south=false,west=false] -> minecraft:nether_brick_fence[east=false,north=false,south=false,waterlogged=false,west=false]
 minecraft:nether_brick_stairs[facing=east,half=bottom,shape=straight] -> minecraft:nether_brick_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]
