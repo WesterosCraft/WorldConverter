@@ -8,6 +8,7 @@ import me.dags.converter.converter.config.Config;
 import me.dags.converter.converter.config.CustomData;
 import me.dags.converter.converter.directory.DirectoryConverter;
 import me.dags.converter.converter.directory.ExtentConverter;
+import me.dags.converter.converter.world.ChunkConverter;
 import me.dags.converter.converter.world.WorldConverter;
 import me.dags.converter.datagen.Mappings;
 import me.dags.converter.extent.Format;
@@ -60,6 +61,7 @@ public class Main {
                 headless = false;
                 GUIConverter.run();
             }
+            ChunkConverter.dumpCounters();
         } catch (Throwable t) {
             t.printStackTrace();
         }

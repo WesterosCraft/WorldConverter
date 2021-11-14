@@ -13,7 +13,10 @@ import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.Version;
 import org.jnbt.CompoundTag;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class ChunkConverter implements Converter {
 
@@ -53,6 +56,19 @@ public class ChunkConverter implements Converter {
             throw t;
         }
     }
+    
+    public static HashMap<String, Integer> counters_by_state = new HashMap<String, Integer>();
+    
+    public static void dumpCounters() {
+    	Set<String> keys = counters_by_state.keySet();
+    	String[] keylist = keys.toArray(new String[0]);
+    	Arrays.sort(keylist);
+    	Logger.log("Output block counts by blockName:");
+    	for (String key : keylist) {
+    		Logger.log(key + ", " + counters_by_state.get(key));
+    	}
+    	Logger.flush();
+    }
 
     private void convertSection(int index, Chunk.Reader chunkReader, Chunk.Writer chunkWriter) throws Exception {
         Volume.Reader reader = chunkReader.getSection(index);
@@ -81,7 +97,14 @@ public class ChunkConverter implements Converter {
                             throw new NullPointerException("No mapping for state: " + stateIn.getIdentifier());
                         }
                     }
-
+                    if (stateOut != null) {
+                        String id = stateOut.getBlockName();
+                        if (!id.equals("minecraft:air")) {
+                        	Integer cnt = counters_by_state.get(id);
+                        	if (cnt != null) { cnt += 1; } else { cnt = 1; }
+                        	counters_by_state.put(id, cnt);       
+                        }
+                    }
                     writer.setState(x, y, z, stateOut);
                     if (stateIn.requiresUpgrade()) {
                         chunkWriter.markUpgrade(index, x, y, z);
