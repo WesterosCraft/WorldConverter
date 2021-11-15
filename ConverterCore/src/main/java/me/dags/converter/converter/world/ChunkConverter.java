@@ -57,7 +57,8 @@ public class ChunkConverter implements Converter {
         }
     }
     
-    public static HashMap<String, Integer> counters_by_state = new HashMap<String, Integer>();
+    private static class Count { long cnt; }
+    public static HashMap<String, Count> counters_by_state = new HashMap<String, Count>();
     
     public static void dumpCounters() {
     	Set<String> keys = counters_by_state.keySet();
@@ -65,7 +66,7 @@ public class ChunkConverter implements Converter {
     	Arrays.sort(keylist);
     	Logger.log("Output block counts by blockName:");
     	for (String key : keylist) {
-    		Logger.log(key + ", " + counters_by_state.get(key));
+    		Logger.log(key + ", " + counters_by_state.get(key).cnt);
     	}
     	Logger.flush();
     }
@@ -100,9 +101,15 @@ public class ChunkConverter implements Converter {
                     if (stateOut != null) {
                         String id = stateOut.getBlockName();
                         if (!id.equals("minecraft:air")) {
-                        	Integer cnt = counters_by_state.get(id);
-                        	if (cnt != null) { cnt += 1; } else { cnt = 1; }
-                        	counters_by_state.put(id, cnt);       
+                        	Count cnt = counters_by_state.get(id);
+                        	if (cnt != null) { 
+                        		cnt.cnt += 1; 
+                    		}
+                        	else { 
+                        		cnt = new Count(); 
+                        		cnt.cnt = 1;
+                        		counters_by_state.put(id, cnt);   
+                        	}
                         }
                     }
                     writer.setState(x, y, z, stateOut);
