@@ -7,8 +7,7 @@ allprojects {
     apply plugin: "java"
     group = rootProject.group
     version = rootProject.version
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
 task coreClasses(type: Copy, dependsOn: subprojects.tasks["build"]) {

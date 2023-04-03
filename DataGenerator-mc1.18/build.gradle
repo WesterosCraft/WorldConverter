@@ -12,7 +12,6 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "java"
 apply plugin: "eclipse"
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 configurations {
     shade
