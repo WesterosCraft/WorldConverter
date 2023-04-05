@@ -1,0 +1,120 @@
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }    
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    }
+}
+
+plugins {
+    id  "com.github.johnrengelman.shadow" version "7.1.0"
+    id  'java'
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: "eclipse"
+
+repositories {
+    maven { url = 'https://files.minecraftforge.net/maven' }
+    jcenter()
+    mavenCentral()
+    maven { url "https://jitpack.io" }    
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+sourceSets.main.java.srcDirs += ['src/main/java','../ConverterCore/src/main/java']
+
+configurations {
+    shade
+    compile.extendsFrom(shade)
+}
+
+dependencies {
+    implementation "com.github.dags-:JNBT:2.0.5"
+    implementation "com.google.code.gson:gson:2.8.2"
+    minecraft "net.minecraftforge:forge:1.18.2-40.2.1"
+}
+
+minecraft {
+    mappings channel: 'official', version: "1.18.2"
+
+    runs {
+        client {
+            workingDirectory project.file("run")
+            property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
+            property "forge.logging.console.level", "debug"
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file("run")
+            property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
+            property "forge.logging.console.level", "debug"
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+shadowJar {
+    dependencies {
+       include(dependency("com.github.dags-:JNBT:"))
+       include(dependency("com.google.code.gson:gson:"))
+    }
+    relocate("com.google.gson.", "me.dags.converter.libs.gson.")
+    relocate("org.jnbt.", "me.dags.converter.libs.jnbt.")
+    archiveName = "DataGenerator-forge-1.18.2.jar"
+    destinationDir = file '.'
+}
+
+jar {
+    dependsOn(shadowJar)
+
+    manifest {
+        attributes([
+                "Specification-Title": "DataGenerator",
+                "Specification-Vendor": "DataGenerator",
+                "Specification-Version": "1", // We are version 1 of ourselves
+                "Implementation-Title": project.name,
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor" :"DataGenerator",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+shadowJar.doLast {
+    task ->
+        ant.checksum file: task.archivePath
+}
+
+afterEvaluate {
+reobf {
+    shadowJar {
+        mappings = createMcpToSrg.output
+    }
+}
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+artifacts {
+    archives deobfJar
+}
+
+build.dependsOn(shadowJar)
