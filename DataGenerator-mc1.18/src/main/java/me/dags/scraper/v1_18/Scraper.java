@@ -40,7 +40,7 @@ public class Scraper {
 
     @SubscribeEvent
     public static void generate(FMLCommonSetupEvent event) {
-        Schema schema = Schema.modern("1.16");
+        Schema schema = Schema.modern("1.18");
         try (GameDataWriter writer = new GameDataWriter(schema)) {
             try (SectionWriter<BlockData> section = writer.startBlocks()){
                 for (Block block : ForgeRegistries.BLOCKS) {
