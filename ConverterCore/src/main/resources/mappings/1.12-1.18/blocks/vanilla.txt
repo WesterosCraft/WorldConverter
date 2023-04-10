@@ -759,7 +759,7 @@ minecraft:stone_brick_stairs[facing=west,half=top,shape=straight] -> minecraft:s
 minecraft:stone_brick_stairs[facing=south,half=top,shape=straight] -> minecraft:stone_brick_stairs[facing=south,half=top,shape=straight,waterlogged=false]
 minecraft:stone_brick_stairs[facing=north,half=top,shape=straight] -> minecraft:stone_brick_stairs[facing=north,half=top,shape=straight,waterlogged=false]
 minecraft:mycelium[snowy=false] -> minecraft:mycelium[snowy=false]
-minecraft:waterlily -> westerosblocks:lily_pad
+minecraft:waterlily -> westerosblocks:lily_pad[waterlogged=false]
 minecraft:nether_brick -> minecraft:nether_bricks
 minecraft:nether_brick_fence[east=false,north=false,south=false,west=false] -> minecraft:nether_brick_fence[east=false,north=false,south=false,waterlogged=false,west=false]
 minecraft:nether_brick_stairs[facing=east,half=bottom,shape=straight] -> minecraft:nether_brick_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]
@@ -905,8 +905,8 @@ minecraft:command_block[conditional=true,facing=south] -> minecraft:command_bloc
 minecraft:command_block[conditional=true,facing=west] -> minecraft:command_block[conditional=true,facing=west]
 minecraft:command_block[conditional=true,facing=east] -> minecraft:command_block[conditional=true,facing=east]
 minecraft:beacon -> minecraft:beacon
-minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=cobblestone,west=false] -> minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,waterlogged=false,west=false]
-minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=mossy_cobblestone,west=false] -> minecraft:mossy_cobblestone_wall[east=false,north=false,south=false,up=false,waterlogged=false,west=false]
+minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=cobblestone,west=false] -> minecraft:cobblestone_wall[east=none,north=none,south=none,up=none,waterlogged=false,west=none]
+minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=mossy_cobblestone,west=false] -> minecraft:mossy_cobblestone_wall[east=none,north=none,south=none,up=none,waterlogged=false,west=none]
 minecraft:carrots[age=0] -> westerosblocks:crop_carrots[state=age0,waterlogged=false]
 minecraft:carrots[age=1] -> westerosblocks:crop_carrots[state=age0,waterlogged=false]
 minecraft:carrots[age=2] -> westerosblocks:crop_carrots[state=age1,waterlogged=false]
@@ -1045,9 +1045,9 @@ minecraft:hopper[enabled=false,facing=west] -> minecraft:hopper[enabled=false,fa
 minecraft:hopper[enabled=false,facing=east] -> minecraft:hopper[enabled=false,facing=east]
 minecraft:quartz_block[variant=default] -> minecraft:quartz_block
 minecraft:quartz_block[variant=chiseled] -> minecraft:chiseled_quartz_block
-minecraft:quartz_block[variant=lines_y] -> minecraft:quartz_pillar[axis=y]
-minecraft:quartz_block[variant=lines_x] -> minecraft:quartz_pillar[axis=x]
-minecraft:quartz_block[variant=lines_z] -> minecraft:quartz_pillar[axis=z]
+minecraft:quartz_block[variant=lines_y] -> westerosblocks:sandstone_pillar[axis=y]
+minecraft:quartz_block[variant=lines_x] -> westerosblocks:sandstone_pillar[axis=x]
+minecraft:quartz_block[variant=lines_z] -> westerosblocks:sandstone_pillar[axis=z]
 minecraft:quartz_stairs[facing=east,half=bottom,shape=straight] -> minecraft:quartz_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]
 minecraft:quartz_stairs[facing=west,half=bottom,shape=straight] -> minecraft:quartz_stairs[facing=west,half=bottom,shape=straight,waterlogged=false]
 minecraft:quartz_stairs[facing=south,half=bottom,shape=straight] -> minecraft:quartz_stairs[facing=south,half=bottom,shape=straight,waterlogged=false]
@@ -1568,7 +1568,7 @@ minecraft:beetroots[age=0] -> minecraft:beetroots[age=0]
 minecraft:beetroots[age=1] -> minecraft:beetroots[age=1]
 minecraft:beetroots[age=2] -> minecraft:beetroots[age=2]
 minecraft:beetroots[age=3] -> minecraft:beetroots[age=3]
-minecraft:grass_path -> minecraft:grass_path
+minecraft:grass_path -> minecraft:dirt_path
 minecraft:end_gateway -> minecraft:end_gateway
 minecraft:repeating_command_block[conditional=false,facing=down] -> minecraft:repeating_command_block[conditional=false,facing=down]
 minecraft:repeating_command_block[conditional=false,facing=up] -> minecraft:repeating_command_block[conditional=false,facing=up]
