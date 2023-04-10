@@ -905,8 +905,8 @@ minecraft:command_block[conditional=true,facing=south] -> minecraft:command_bloc
 minecraft:command_block[conditional=true,facing=west] -> minecraft:command_block[conditional=true,facing=west]
 minecraft:command_block[conditional=true,facing=east] -> minecraft:command_block[conditional=true,facing=east]
 minecraft:beacon -> minecraft:beacon
-minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=cobblestone,west=false] -> minecraft:cobblestone_wall[east=none,north=none,south=none,up=none,waterlogged=false,west=none]
-minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=mossy_cobblestone,west=false] -> minecraft:mossy_cobblestone_wall[east=none,north=none,south=none,up=none,waterlogged=false,west=none]
+minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=cobblestone,west=false] -> minecraft:cobblestone_wall[east=none,north=none,south=none,up=false,waterlogged=false,west=none]
+minecraft:cobblestone_wall[east=false,north=false,south=false,up=false,variant=mossy_cobblestone,west=false] -> minecraft:mossy_cobblestone_wall[east=none,north=none,south=none,up=false,waterlogged=false,west=none]
 minecraft:carrots[age=0] -> westerosblocks:crop_carrots[state=age0,waterlogged=false]
 minecraft:carrots[age=1] -> westerosblocks:crop_carrots[state=age0,waterlogged=false]
 minecraft:carrots[age=2] -> westerosblocks:crop_carrots[state=age1,waterlogged=false]
