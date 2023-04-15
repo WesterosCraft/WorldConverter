@@ -68,6 +68,12 @@ public class Main {
     }
 
     public static File convert(Config config, Consumer<Float> progress) throws Exception {
+        File source = config.input.file;
+        if (config.output.file == null) {
+        	config.output.file = getDestDir(source);
+        }
+        File dest = config.output.file;
+
         Logger.newLine();
         Logger.log("Running with config:");
         Logger.log(" - Input:");
@@ -80,9 +86,6 @@ public class Main {
         Logger.log("   + Version:", config.output.version);
         Logger.log("   + Custom:", config.custom.dataOut.getPath());
         Logger.newLine();
-
-        File source = config.input.file;
-        File dest = getDestDir(source);
 
         Version from = config.input.version;
         Version to = config.output.version;

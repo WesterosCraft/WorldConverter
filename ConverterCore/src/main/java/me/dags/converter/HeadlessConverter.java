@@ -111,6 +111,9 @@ public class HeadlessConverter {
             case "file":
                 config.input.file = new File(val);
                 return;
+            case "output_file":
+                config.output.file = new File(val);
+                return;
             case "input_format":
                 config.input.format = Format.valueOf(val.toUpperCase());
                 return;
