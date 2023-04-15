@@ -57,7 +57,7 @@ public class ChunkData {
     	System.out.println("upgradeFromLegacy(" + seed + "," + from + "," + to + ")");
         List<DataConverter> list = new LinkedList<>();
         // Need to drop flower pots?
-        if (to.getVersion().equals("1.15") || to.getVersion().equals("1.16")) {
+        if (to.getVersion().equals("1.15") || to.getVersion().equals("1.16") || to.getVersion().equals("1.17") || to.getVersion().equals("1.18")) {
             list.add(EntityConverters.getNewDataConverter(data.blocks));
         	list.add(TileEntityConverters.getNewConverters(data.blocks));
         }

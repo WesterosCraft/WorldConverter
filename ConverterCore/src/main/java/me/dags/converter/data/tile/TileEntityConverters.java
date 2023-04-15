@@ -38,6 +38,15 @@ public class TileEntityConverters {
     	List<EntityConverter> list = new ArrayList<EntityConverter>();
     	list.add(new ObsoleteTileConverter("minecraft:flower_pot"));
     	list.add(new ObsoleteTileConverter("minecraft:noteblock"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_0"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_1"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_2"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_3"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_4"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_5"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_6"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_7"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_8"));
     	return new EntityListConverter("TileEntities", list);
     }
 
