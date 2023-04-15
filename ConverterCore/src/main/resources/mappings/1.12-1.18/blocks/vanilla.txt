@@ -135,7 +135,7 @@ minecraft:leaves[check_decay=true,decayable=false,variant=jungle] -> minecraft:j
 minecraft:sponge[wet=false] -> minecraft:sponge
 minecraft:sponge[wet=true] -> minecraft:wet_sponge
 minecraft:glass -> minecraft:glass
-minecraft:lapis_ore -> minecraft:lapis_ore
+minecraft:lapis_ore -> minecraft:copper_ore
 minecraft:lapis_block -> minecraft:lapis_block
 minecraft:dispenser[facing=down,triggered=false] -> minecraft:dispenser[facing=down,triggered=false]
 minecraft:dispenser[facing=up,triggered=false] -> minecraft:dispenser[facing=up,triggered=false]
@@ -151,7 +151,7 @@ minecraft:dispenser[facing=west,triggered=true] -> minecraft:dispenser[facing=we
 minecraft:dispenser[facing=east,triggered=true] -> minecraft:dispenser[facing=east,triggered=true]
 minecraft:sandstone[type=sandstone] -> minecraft:sandstone
 minecraft:sandstone[type=chiseled_sandstone] -> minecraft:chiseled_sandstone
-minecraft:sandstone[type=smooth_sandstone] -> minecraft:cut_sandstone
+minecraft:sandstone[type=smooth_sandstone] -> minecraft:red_sandstone
 minecraft:noteblock -> minecraft:note_block[instrument=harp,note=0,powered=false]
 minecraft:golden_rail[powered=false,shape=north_south] -> westerosblocks:fancy_red_carpet[shape=north_south,waterlogged=false]
 minecraft:golden_rail[powered=false,shape=east_west] -> westerosblocks:fancy_red_carpet[shape=east_west,waterlogged=false]
