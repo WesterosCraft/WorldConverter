@@ -26,12 +26,12 @@ public class ItemFrameConverter implements EntityConverter {
 
 	@Override
 	public CompoundTag convert(CompoundTag data) {
-		System.out.println("item_frame.convert(" + data.toString() + ")");
+		//System.out.println("item_frame.convert(" + data.toString() + ")");
 		CompoundTag item = data.getCompound("Item");
 		if (item != null) {
 			String id = item.getString("id");
 			Short meta = item.getShort("Damage");
-			System.out.println("   " + id + ":" + meta);
+			//System.out.println("   " + id + ":" + meta);
 		}
 		return data;
 	}
