@@ -75,7 +75,7 @@ shadowJar {
     }
     relocate("com.google.gson.", "me.dags.converter.libs.gson.")
     relocate("org.jnbt.", "me.dags.converter.libs.jnbt.")
-    archiveName = "DataGenerator-forge-1.18.2.jar"
+    archiveName = "DataGenerator-mc1.18-2.0.0.jar"
     destinationDir = file '.'
 }
 
