@@ -7,6 +7,7 @@ import me.dags.converter.datagen.biome.BiomeData;
 import me.dags.converter.datagen.block.BlockData;
 import me.dags.converter.datagen.block.StateData;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFence;
@@ -94,7 +95,8 @@ public class Scraper {
     		(block instanceof BlockFenceGate) ||
     		(block instanceof BlockDoor) ||
     		(block instanceof BlockFire) ||
-    		(block instanceof BlockRedstoneWire)){
+    		(block instanceof BlockRedstoneWire) ||
+        	(block instanceof BlockChest)){
         	upgrade = true;
         }
         try {
