@@ -1183,7 +1183,7 @@
     },
     "minecraft:chest": {
       "id": 54,
-      "upgrade": false,
+      "upgrade": true,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -4689,7 +4689,7 @@
     },
     "minecraft:trapped_chest": {
       "id": 146,
-      "upgrade": false,
+      "upgrade": true,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
