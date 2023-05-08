@@ -27,7 +27,7 @@ public class Biome implements RegistryItem<Biome> {
 
     @Override
     public Biome parseExtended(String properties) {
-        return null;
+        return this;
     }
 
     @Override
