@@ -9,6 +9,8 @@ public interface BiomeContainer {
     int sizeY();
 
     int sizeZ();
+    
+    default int stepSize() { return 1; }
 
     interface Reader extends BiomeContainer {
 

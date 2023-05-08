@@ -24,6 +24,11 @@ public class BiomeContainer115 implements BiomeContainer {
     public int sizeZ() {
         return 16;
     }
+    
+    @Override
+    public int stepSize() {
+    	return 4;
+    }
 
     private static int indexOf(int x, int y, int z) {
         int bx = (x >> 2) & 0x3;

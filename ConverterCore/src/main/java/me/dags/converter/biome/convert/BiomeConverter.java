@@ -39,13 +39,35 @@ public class BiomeConverter implements DataConverter {
     public Tag<?> convert(Tag<?> tag) {
         BiomeContainer.Reader reader = versionIn.getBiomeFormat().newReader(seed, tag);
         BiomeContainer.Writer writer = versionOut.getBiomeFormat().newWriter();
-        for (int y = 0; y < writer.sizeY(); y++) {
-            for (int z = 0; z < writer.sizeZ(); z++) {
-                for (int x = 0; x < writer.sizeX(); x++) {
-                    int id = reader.get(x, y, z);
-                    Biome in = registry.getInput(id);
+        int step = writer.stepSize();
+        int[] accum = new int[step * step * step];
+        for (int by = 0; by < writer.sizeY(); by += step) {
+            for (int bz = 0; bz < writer.sizeZ(); bz += step) {
+                for (int bx = 0; bx < writer.sizeX(); bx += step) {
+                	for (int x = 0; x < step; x++) {
+                    	for (int y = 0; y < step; y++) {
+                        	for (int z = 0; z < step; z++) {
+                    			accum[(x * step * step) + (y * step) + z] = reader.get(bx + x, by + y, bz + z);
+                        	}
+                    	}
+                	}
+                	int max_count = 0;
+                	int mostfreq = 0;
+                	for (int i = 0; i < accum.length; i++) {
+            	         int count = 0;
+            	         for (int j = 0; j < accum.length; j++) {
+            	            if (accum[i] == accum[j]) {
+            	               count++;
+            	            }
+            	         }
+            	         if (count > max_count) {
+            	            max_count = count;
+            	            mostfreq = accum[i];
+            	         }
+                	}
+                    Biome in = registry.getInput(mostfreq);
                     Biome out = registry.getOutput(in);
-                    writer.set(x, y, z, out.getId());
+                    writer.set(bx, by, bz, out.getId());
                 }
             }
         }
