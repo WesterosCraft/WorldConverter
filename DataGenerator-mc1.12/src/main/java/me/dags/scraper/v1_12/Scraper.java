@@ -16,6 +16,7 @@ import net.minecraft.block.BlockFire;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.BlockRedstoneWire;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.BlockWall;
@@ -97,6 +98,7 @@ public class Scraper {
     		(block instanceof BlockDoor) ||
     		(block instanceof BlockFire) ||
     		(block instanceof BlockVine) ||
+    		(block instanceof BlockSlab) ||
     		(block instanceof BlockRedstoneWire) ||
         	(block instanceof BlockChest)){
         	upgrade = true;
