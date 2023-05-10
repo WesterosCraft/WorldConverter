@@ -67,7 +67,8 @@ public class ChunkData {
         }
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
         list.add(DataConverter.create("LastUpdate", "LastUpdate"));
-        list.add(DataConverter.create("LightPopulated", "isLightOn"));
+//        list.add(DataConverter.create("LightPopulated", "isLightOn"));
+        list.add(DataConverter.create("LightPopulated", "isLightOn", t -> Nbt.tag(false))); // Force lighting recalc
         list.add(DataConverter.create("TerrainPopulated", "Status", t -> Nbt.tag("full")));
         list.add(DataConverter.create("xPos", "xPos"));
         list.add(DataConverter.create("zPos", "zPos"));
