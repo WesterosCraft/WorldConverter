@@ -24,6 +24,7 @@ public class ItemFrameConverter implements EntityConverter {
         return "minecraft:item_frame";
     }
 
+    private static final byte[] facingmap = { 3, 4, 2, 5 };
 	@Override
 	public CompoundTag convert(CompoundTag data) {
 		//System.out.println("item_frame.convert(" + data.toString() + ")");
@@ -33,6 +34,7 @@ public class ItemFrameConverter implements EntityConverter {
 			Short meta = item.getShort("Damage");
 			//System.out.println("   " + id + ":" + meta);
 		}
+		data.put("Facing", facingmap[data.getByte("Facing")]);
 		return data;
 	}
 }

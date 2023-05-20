@@ -6,6 +6,8 @@ import me.dags.converter.util.Utils;
 
 import java.util.List;
 
+import org.jnbt.CompoundTag;
+
 public class PaintingConverter extends EntityDataConverter {
 
     private static final List<DataConverter> fields = Utils.listOf(new MotiveConverter());
@@ -19,3 +21,4 @@ public class PaintingConverter extends EntityDataConverter {
         return "minecraft:painting";
     }
 }
+
