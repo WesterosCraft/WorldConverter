@@ -21,8 +21,8 @@ public class V1_12 extends V1_10 {
         put("minecraft:jungle_door", new DoorExtender());
         put("minecraft:acacia_door", new DoorExtender());
         put("minecraft:dark_oak_door", new DoorExtender());
+        put("minecraft:vine", new VineExtender());
 
-        
         put("conquest:door_oaknowindow", new DoorExtender());
         put("conquest:door_wood1", new DoorExtender());
         put("conquest:door_wood2", new DoorExtender());
@@ -51,6 +51,13 @@ public class V1_12 extends V1_10 {
         put("westerosblocks:door_locked_birch", new DoorExtender());
         put("westerosblocks:door_locked_jungle", new DoorExtender());
         put("westerosblocks:door_locked_northern_wood", new DoorExtender());
+        
+        put("westerosblocks:vine_block_0", new VineExtender());
+        put("westerosblocks:vine_block_1", new VineExtender());
+        put("westerosblocks:vine_block_2", new VineExtender());
+        put("westerosblocks:vine_block_3", new VineExtender());
+        put("westerosblocks:vine_block_4", new VineExtender());
+        put("westerosblocks:vine_block_5", new VineExtender());
 
     }};
 
