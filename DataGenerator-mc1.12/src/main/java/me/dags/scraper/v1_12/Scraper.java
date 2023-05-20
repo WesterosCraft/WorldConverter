@@ -96,7 +96,6 @@ public class Scraper {
     		(block instanceof BlockFenceGate) ||
     		(block instanceof BlockDoor) ||
     		(block instanceof BlockFire) ||
-    		(block instanceof BlockVine) ||
     		(block instanceof BlockRedstoneWire) ||
         	(block instanceof BlockChest)){
         	upgrade = true;
