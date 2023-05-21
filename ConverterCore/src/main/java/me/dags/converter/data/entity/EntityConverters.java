@@ -14,6 +14,6 @@ public class EntityConverters {
     }
 
     public static DataConverter getNewDataConverter(RemappingRegistry<BlockState> registry) {
-        return new EntityListConverter("Entities", Utils.listOf(new PaintingConverter(), new ItemFrameConverter(registry)));
+        return new EntityListConverter("Entities", Utils.listOf(new PaintingConverter(), new ItemFrameConverter(registry), new UUIDConverter()));
     }
 }
