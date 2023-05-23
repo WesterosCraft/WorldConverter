@@ -1,0 +1,20 @@
+# A world folder, a folder containing schematic/structure files,
+# or an individual schematic/structure file
+file=/Users/michaelprimm/forge-1.12.2/config/worldedit/schematics
+output_file= /Users/michaelprimm/forge-1.12.2/Westeros-converted/schematics
+
+# The format and version of the world/schematic(s)/structure(s) [optional]
+input_format=schematic
+input_version=1.12
+
+# The format and version to convert to [optional, defaults to 1.14]
+output_format=schematic
+output_version=1.18
+
+# The paths to your custom GameData json files [optional]
+data_in=/Users/michaelprimm/forge-1.12.2/game_data.json
+data_out=/Users/michaelprimm/westeros-1.18.2/game_data.json
+
+# The paths to your custom mapping files, or directories containing mapping files [optional]
+block_mappings=/Users/michaelprimm/westeros-1.18.2/config/westerosblocks/blocks_1.12-1.18__westerosblocks.txt
+biome_mappings=
