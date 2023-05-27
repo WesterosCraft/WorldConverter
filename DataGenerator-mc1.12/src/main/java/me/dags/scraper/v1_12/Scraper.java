@@ -1,5 +1,6 @@
 package me.dags.scraper.v1_12;
 
+import me.dags.converter.block.BlockState;
 import me.dags.converter.datagen.GameDataWriter;
 import me.dags.converter.datagen.Schema;
 import me.dags.converter.datagen.SectionWriter;
@@ -20,9 +21,17 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -31,10 +40,14 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.lang.reflect.Field;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+
+import org.jline.utils.Log;
 
 import net.minecraftforge.fml.common.network.NetworkCheckHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,6 +55,7 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod(modid="data_generator")
 public class Scraper {
 	public static Field blockStateFld;
+	private static Set<String> downsolidids = new HashSet<String>();
 	
     public Scraper() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -71,6 +85,11 @@ public class Scraper {
                     section.write(geBiomeData(biome));
                 }
             }
+            String val = "";
+            for (String s : downsolidids) {
+            	val += "\"" + s + "\",";
+            }
+            System.out.println(val);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,7 +100,50 @@ public class Scraper {
     private static BiomeData geBiomeData(Biome biome) {
         return new BiomeData(biome.getRegistryName(), Biome.getIdForBiome(biome));
     }
+    
+    public static class NullWorld implements IBlockAccess {
+		@Override
+		public TileEntity getTileEntity(BlockPos pos) {
+			return null;
+		}
 
+		@Override
+		public int getCombinedLight(BlockPos pos, int lightValue) {
+			return 0;
+		}
+
+		@Override
+		public IBlockState getBlockState(BlockPos pos) {
+			return Blocks.AIR.getDefaultState();
+		}
+
+		@Override
+		public boolean isAirBlock(BlockPos pos) {
+			return true;
+		}
+
+		@Override
+		public Biome getBiome(BlockPos pos) {
+			return Biomes.PLAINS;
+		}
+
+		@Override
+		public int getStrongPower(BlockPos pos, EnumFacing direction) {
+			return 0;
+		}
+
+		@Override
+		public WorldType getWorldType() {
+			return WorldType.DEFAULT;
+		}
+
+		@Override
+		public boolean isSideSolid(BlockPos pos, EnumFacing side, boolean _default) {
+			return false;
+		}    	
+    }
+    private static NullWorld nullWorld = new NullWorld();
+    
     private static BlockData getBlockData(Block block) {
         StateData defaults = getStateData(block.getDefaultState());
         List<StateData> states = new LinkedList<>();
@@ -101,10 +163,21 @@ public class Scraper {
         	upgrade = true;
         }
         try {
-        BlockStateContainer sc = (BlockStateContainer) blockStateFld.get(block);
-        for (IBlockState state : sc.getValidStates()) {
-            states.add(getStateData(state));
-        }
+        	boolean isDownSolid = false;
+	        BlockStateContainer sc = (BlockStateContainer) blockStateFld.get(block);
+	        for (IBlockState state : sc.getValidStates()) {
+	            states.add(getStateData(state));
+	            try {
+		            if (block.getBlockFaceShape(nullWorld, state, new BlockPos(0,0,0), EnumFacing.DOWN) == BlockFaceShape.SOLID) {
+		            	if (!isDownSolid) {
+		            		isDownSolid = true;
+		            		downsolidids.add(block.getRegistryName().toString());
+		            	}
+		            }
+	            } catch (Exception x) {
+	            	// Ignore blocks we cannot check shape on (tile entity blocks)
+	            }
+	        }
         } catch (Exception x) {
         	System.out.println("Exception readong block state");
         }
