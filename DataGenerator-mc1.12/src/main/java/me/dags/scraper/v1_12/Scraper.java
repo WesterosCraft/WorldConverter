@@ -18,6 +18,7 @@ import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.properties.IProperty;
@@ -56,6 +57,8 @@ import net.minecraftforge.fml.relauncher.Side;
 public class Scraper {
 	public static Field blockStateFld;
 	private static Set<String> downsolidids = new HashSet<String>();
+	private static Set<String> downslabids = new HashSet<String>();
+	private static Set<String> downstairids = new HashSet<String>();
 	
     public Scraper() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -78,6 +81,8 @@ public class Scraper {
             try (SectionWriter<BlockData> section = writer.startBlocks()){
                 for (Block block : ForgeRegistries.BLOCKS) {
                     section.write(getBlockData(block));
+                    if (block instanceof BlockStairs) downstairids.add(block.getRegistryName().toString());
+                    if (block instanceof BlockSlab) downslabids.add(block.getRegistryName().toString());
                 }
             }
             try (SectionWriter<BiomeData> section = writer.startBiomes()) {
@@ -85,8 +90,18 @@ public class Scraper {
                     section.write(geBiomeData(biome));
                 }
             }
-            String val = "";
+            String val = "downsolidids=";
             for (String s : downsolidids) {
+            	val += "\"" + s + "\",";
+            }
+            System.out.println(val);
+            val = "downstairids=";
+            for (String s : downstairids) {
+            	val += "\"" + s + "\",";
+            }
+            System.out.println(val);
+            val = "downslabids=";
+            for (String s : downslabids) {
             	val += "\"" + s + "\",";
             }
             System.out.println(val);
