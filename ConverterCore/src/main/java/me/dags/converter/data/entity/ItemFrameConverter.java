@@ -15,8 +15,9 @@ import org.jnbt.CompoundTag;
 public class ItemFrameConverter implements EntityConverter {
 
 	private final RemappingRegistry<BlockState> registry;
-	
-	// Horrible hack, because I don't feel like writing more one time use converter code
+
+	// Horrible hack, because I don't feel like writing more one time use converter
+	// code
 	private static HashMap<String, String> itemIDMapping = new HashMap<String, String>();
 	static {
 		itemIDMapping.put("westerosblocks:metal_block_0:0", "westerosblocks:oxidized_iron_block");
@@ -1664,21 +1665,98 @@ public class ItemFrameConverter implements EntityConverter {
 		itemIDMapping.put("minecraft:wool[color=magenta]:0", "westerosblocks:light_brown_wool");
 		itemIDMapping.put("minecraft:wool[color=lime]:0", "westerosblocks:dirty_white_wool");
 		itemIDMapping.put("minecraft:end_stone:0", "westerosblocks:large_clay_pot_solid");
+		itemIDMapping.put("minecraft:potato_baked:0", "minecraft:baked_potato");
+		itemIDMapping.put("minecraft:beef_raw:0", "minecraft:beef");
+		itemIDMapping.put("minecraft:dye_powder_blue:0", "minecraft:blue_dye");
+		itemIDMapping.put("minecraft:book_normal:0", "minecraft:book");
+		itemIDMapping.put("minecraft:bow_standby:0", "minecraft:bow");
+		itemIDMapping.put("minecraft:dye_powder_brown:0", "minecraft:brown_dye");
+		itemIDMapping.put("minecraft:bucket_empty:0", "minecraft:bucket");
+		itemIDMapping.put("minecraft:chicken_raw:0", "minecraft:chicken");
+		itemIDMapping.put("minecraft:fish_raw:0", "minecraft:cod");
+		itemIDMapping.put("minecraft:beef_cooked:0", "minecraft:cooked_beef");
+		itemIDMapping.put("minecraft:chicken_cooked:0", "minecraft:cooked_chicken");
+		itemIDMapping.put("minecraft:fish_cooked:0", "minecraft:cooked_cod");
+		itemIDMapping.put("minecraft:porkchop_cooked:0", "minecraft:cooked_porkchop");
+		itemIDMapping.put("minecraft:dye_powder_cyan:0", "minecraft:cyan_dye");
+		itemIDMapping.put("minecraft:book_enchanted:0", "minecraft:enchanted_book");
+		itemIDMapping.put("minecraft:spider_eye_fermented:0", "minecraft:fermented_spider_eye");
+		itemIDMapping.put("minecraft:fireworks_charge:0", "minecraft:fire_charge");
+		itemIDMapping.put("minecraft:fishing_rod_uncast:0", "minecraft:fishing_rod");
+		itemIDMapping.put("minecraft:apple_golden:0", "minecraft:golden_apple");
+		itemIDMapping.put("minecraft:gold_axe:0", "minecraft:golden_axe");
+		itemIDMapping.put("minecraft:gold_boots:0", "minecraft:golden_boots");
+		itemIDMapping.put("minecraft:carrot_golden:0", "minecraft:golden_carrot");
+		itemIDMapping.put("minecraft:gold_chestplate:0", "minecraft:golden_chestplate");
+		itemIDMapping.put("minecraft:gold_helmet:0", "minecraft:golden_helmet");
+		itemIDMapping.put("minecraft:gold_hoe:0", "minecraft:golden_hoe");
+		itemIDMapping.put("minecraft:gold_leggings:0", "minecraft:golden_leggings");
+		itemIDMapping.put("minecraft:gold_nugget:0", "minecraft:golden_nugget");
+		itemIDMapping.put("minecraft:gold_pickaxe:0", "minecraft:golden_pickaxe");
+		itemIDMapping.put("minecraft:gold_shovel:0", "minecraft:golden_shovel");
+		itemIDMapping.put("minecraft:gold_sword:0", "minecraft:golden_sword");
+		itemIDMapping.put("minecraft:dye_powder_gray:0", "minecraft:gray_dye");
+		itemIDMapping.put("minecraft:dye_powder_green:0", "minecraft:green_dye");
+		itemIDMapping.put("minecraft:dye_powder_black:0", "minecraft:ink_sac");
+		itemIDMapping.put("minecraft:bucket_lava:0", "minecraft:lava_bucket");
+		itemIDMapping.put("minecraft:dye_powder_light_blue:0", "minecraft:light_blue_dye");
+		itemIDMapping.put("minecraft:dye_powder_lime:0", "minecraft:lime_dye");
+		itemIDMapping.put("minecraft:potion_bottle_drinkable:0", "minecraft:lingering_potion");
+		itemIDMapping.put("minecraft:dye_powder_magenta:0", "minecraft:magenta_dye");
+		itemIDMapping.put("minecraft:map_empty:0", "minecraft:map");
+		itemIDMapping.put("minecraft:seeds_melon:0", "minecraft:melon_seeds");
+		itemIDMapping.put("minecraft:bucket_milk:0", "minecraft:milk_bucket");
+		itemIDMapping.put("minecraft:record_11:0", "minecraft:music_disc_11");
+		itemIDMapping.put("minecraft:record_13:0", "minecraft:music_disc_13");
+		itemIDMapping.put("minecraft:record_blocks:0", "minecraft:music_disc_blocks");
+		itemIDMapping.put("minecraft:record_cat:0", "minecraft:music_disc_cat");
+		itemIDMapping.put("minecraft:record_chirp:0", "minecraft:music_disc_chirp");
+		itemIDMapping.put("minecraft:record_far:0", "minecraft:music_disc_far");
+		itemIDMapping.put("minecraft:record_mall:0", "minecraft:music_disc_mall");
+		itemIDMapping.put("minecraft:record_mellohi:0", "minecraft:music_disc_mellohi");
+		itemIDMapping.put("minecraft:record_stal:0", "minecraft:music_disc_stal");
+		itemIDMapping.put("minecraft:record_strad:0", "minecraft:music_disc_strad");
+		itemIDMapping.put("minecraft:record_wait:0", "minecraft:music_disc_wait");
+		itemIDMapping.put("minecraft:record_ward:0", "minecraft:music_disc_ward");
+		itemIDMapping.put("minecraft:netherbrick:0", "minecraft:nether_brick");
+		itemIDMapping.put("minecraft:dye_powder_orange:0", "minecraft:orange_dye");
+		itemIDMapping.put("minecraft:dye_powder_pink:0", "minecraft:pink_dye");
+		itemIDMapping.put("minecraft:potato_poisonous:0", "minecraft:poisonous_potato");
+		itemIDMapping.put("minecraft:porkchop_raw:0", "minecraft:porkchop");
+		itemIDMapping.put("minecraft:potion_bottle_empty:0", "minecraft:potion");
+		itemIDMapping.put("minecraft:seeds_pumpkin:0", "minecraft:pumpkin_seeds");
+		itemIDMapping.put("minecraft:dye_powder_purple:0", "minecraft:purple_dye");
+		itemIDMapping.put("minecraft:dye_powder_red:0", "minecraft:red_dye");
+		itemIDMapping.put("minecraft:dye_powder_silver:0", "minecraft:silver_dye");
+		itemIDMapping.put("minecraft:slimeball:0", "minecraft:slime_ball");
+		itemIDMapping.put("minecraft:potion_bottle_splash:0", "minecraft:splash_potion");
+		itemIDMapping.put("minecraft:bucket_water:0", "minecraft:water_bucket");
+		itemIDMapping.put("minecraft:wheat:0", "minecraft:wheat_seeds");
+		itemIDMapping.put("minecraft:dye_powder_white:0", "minecraft:white_dye");
+		itemIDMapping.put("minecraft:wood_axe:0", "minecraft:wooden_axe");
+		itemIDMapping.put("minecraft:wood_hoe:0", "minecraft:wooden_hoe");
+		itemIDMapping.put("minecraft:wood_pickaxe:0", "minecraft:wooden_pickaxe");
+		itemIDMapping.put("minecraft:wood_shovel:0", "minecraft:wooden_shovel");
+		itemIDMapping.put("minecraft:wood_sword:0", "minecraft:wooden_sword");
+		itemIDMapping.put("minecraft:book_writable:0", "minecraft:writable_book");
+		itemIDMapping.put("minecraft:book_written:0", "minecraft:written_book");
+		itemIDMapping.put("minecraft:dye_powder_yellow:0", "minecraft:yellow_dye");
 	}
-	
-    public ItemFrameConverter(RemappingRegistry<BlockState> registry) {
-    	this.registry = registry;
-    }
 
-    @Override
-    public String getId() {
-        return "minecraft:item_frame";
-    }
+	public ItemFrameConverter(RemappingRegistry<BlockState> registry) {
+		this.registry = registry;
+	}
 
-    private static final byte[] facingmap = { 3, 4, 2, 5 };
+	@Override
+	public String getId() {
+		return "minecraft:item_frame";
+	}
+
+	private static final byte[] facingmap = { 3, 4, 2, 5 };
+
 	@Override
 	public CompoundTag convert(CompoundTag data) {
-		//System.out.println("item_frame.convert(" + data.toString() + ")");
+		// System.out.println("item_frame.convert(" + data.toString() + ")");
 		CompoundTag item = data.getCompound("Item");
 		if (item != null) {
 			String id = item.getString("id");
@@ -1688,7 +1766,7 @@ public class ItemFrameConverter implements EntityConverter {
 			if (newitm != null) {
 				item.put("id", newitm);
 			}
-			//System.out.println("   " + id + ":" + meta);
+			// System.out.println(" " + id + ":" + meta);
 		}
 		data.put("Facing", facingmap[data.getByte("Facing")]);
 		return data;
