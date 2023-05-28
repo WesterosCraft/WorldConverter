@@ -164,15 +164,16 @@ public class VineExtender implements StateExtender {
 		String upval = "false";
 		if (downSolidIDs.contains(abovename)) {
 			upval = "true";
-			CompoundTag aboveprops = above.getData().getCompound("Properties");			
+			CompoundTag aboveprops = above.getData().getCompound("Properties");	
 			if (downStairIDs.contains(abovename)) {
-				if (aboveprops.getStringTag("half").equals("top")) upval = "false";
+				if (aboveprops.getStringTag("half").getValue().equals("top")) upval = "false";
 			}
 			else if (downSlabIDs.contains(abovename)) {
-				if (aboveprops.getStringTag("half").equals("top")) upval = "false";
+				if (aboveprops.getStringTag("half").getValue().equals("top")) upval = "false";
 			}			
 		}
 		extendedProperties.put("#up", upval);
+        		
 		// System.out.println(state.getBlockName() + ".extend(" + properties.toString()
 		// + "=" + extendedProperties.toString());
 
