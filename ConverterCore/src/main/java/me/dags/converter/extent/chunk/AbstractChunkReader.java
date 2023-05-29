@@ -23,7 +23,8 @@ public abstract class AbstractChunkReader implements Chunk.Reader {
     private final Volume.Reader[] sections;
     private final TileEntityMap tileEntityMap;
     private final List<Tag<CompoundTag>> sectionData;
-
+    private static final EmptySection EMPTY = new EmptySection();
+    
     public AbstractChunkReader(CompoundTag root) {
         this.level = root.getCompound("Level");
         this.tileEntityMap = new LazyTileEntityMap(level);
@@ -43,6 +44,8 @@ public abstract class AbstractChunkReader implements Chunk.Reader {
 
     @Override
     public Volume.Reader getSection(int index) throws Exception {
+    	int idx = index+1;
+    	if (idx >= sections.length) return EMPTY;
     	Volume.Reader section = sections[index+1];
     	if (section == null) {
 	    	// Initialize all section readers
