@@ -1756,6 +1756,7 @@ public class ItemFrameConverter implements EntityConverter {
 		itemIDMapping.put("minecraft:diamond_pickaxe:0", "minecraft:diamond_pickaxe");
 		itemIDMapping.put("minecraft:diamond_axe:0", "minecraft:diamond_axe");
 		itemIDMapping.put("minecraft:diamond_hoe:0", "minecraft:diamond_hoe");
+		itemIDMapping.put("minecraft:diamond_sword:0", "minecraft:diamond_sword");
 		itemIDMapping.put("minecraft:stick:0", "minecraft:stick");
 		itemIDMapping.put("minecraft:bowl:0", "minecraft:bowl");
 		itemIDMapping.put("minecraft:mushroom_stew:0", "minecraft:mushroom_stew");
@@ -1789,7 +1790,7 @@ public class ItemFrameConverter implements EntityConverter {
 	public CompoundTag convert(CompoundTag data) {
 		// System.out.println("item_frame.convert(" + data.toString() + ")");
 		CompoundTag item = data.getCompound("Item");
-		if (item != null) {
+		if (item.getStringTag("id").isPresent()) {
 			String id = item.getString("id");
 			Short meta = item.getShort("Damage");
 			String itmid = String.format("%s:%s", id, (meta != null) ? meta : 0);
