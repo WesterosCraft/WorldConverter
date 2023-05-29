@@ -1674,7 +1674,7 @@ public class ItemFrameConverter implements EntityConverter {
 		itemIDMapping.put("minecraft:dye:4", "minecraft:lapis_lazuli");
 		itemIDMapping.put("minecraft:dye:5", "minecraft:purple_dye");
 		itemIDMapping.put("minecraft:dye:6", "minecraft:cyan_dye");
-		itemIDMapping.put("minecraft:dye:7", "minecraft:silver_dye");
+		itemIDMapping.put("minecraft:dye:7", "minecraft:light_gray_dye");
 		itemIDMapping.put("minecraft:dye:8", "minecraft:gray_dye");
 		itemIDMapping.put("minecraft:dye:9", "minecraft:pink_dye");
 		itemIDMapping.put("minecraft:dye:10", "minecraft:lime_dye");
