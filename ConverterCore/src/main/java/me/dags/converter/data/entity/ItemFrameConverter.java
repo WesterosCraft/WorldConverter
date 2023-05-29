@@ -6,6 +6,7 @@ import me.dags.converter.data.EntityConverter;
 import me.dags.converter.data.EntityDataConverter;
 import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.util.Utils;
+import me.dags.converter.util.log.Logger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -1813,10 +1814,11 @@ public class ItemFrameConverter implements EntityConverter {
 	}
 	
 	public static void dumpMissingItemFrames() {
-		System.out.println("missing mappings for item_frames:");
+		Logger.log("missing mappings for item_frames:");
 		for (String k : missingMapping.keySet()) {
-			System.out.println("  " + k + " (" + missingMapping.get(k) + " instances)");	
+			Logger.log("  " + k + " (" + missingMapping.get(k) + " instances)");	
 		}
-		System.out.println("=================================");
+		Logger.log("=================================");
+		Logger.flush();
 	}
 }

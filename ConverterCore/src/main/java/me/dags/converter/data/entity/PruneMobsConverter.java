@@ -6,6 +6,7 @@ import me.dags.converter.data.EntityConverter;
 import me.dags.converter.data.EntityDataConverter;
 import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.util.Utils;
+import me.dags.converter.util.log.Logger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,11 +39,12 @@ public class PruneMobsConverter implements EntityConverter {
 	}
 	
 	public static void dumpPrunedEntities() {
-		System.out.println("pruned entities:");
+		Logger.log("pruned entities:");
 		for (String k : strippedMobs.keySet()) {
-			System.out.println("  " + k + ": " + strippedMobs.get(k));	
+			Logger.log("  " + k + ": " + strippedMobs.get(k));	
 		}
-		System.out.println("=================================");
+		Logger.log("=================================");
+		Logger.flush();
 	}
 
 }
