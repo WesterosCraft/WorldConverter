@@ -1797,7 +1797,9 @@ public class ItemFrameConverter implements EntityConverter {
 			if (newitm != null) {
 				item.put("id", newitm);
 			}
-			// System.out.println(" " + id + ":" + meta);
+			else {
+				System.out.println("No item mapping for " + itmid);
+			}
 		}
 		data.put("Facing", facingmap[data.getByte("Facing")]);
 		return data;
