@@ -7,11 +7,14 @@ import me.dags.converter.data.EntityDataConverter;
 import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.util.Utils;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.jnbt.CompoundTag;
 
 public class PruneMobsConverter implements EntityConverter {
+	public static HashMap<String, Integer> strippedMobs = new HashMap<String, Integer>();
+
     public PruneMobsConverter() {
     }
 
@@ -23,10 +26,23 @@ public class PruneMobsConverter implements EntityConverter {
 	@Override
 	public CompoundTag convert(CompoundTag data) {
 		if (data.getFloatTag("Health").isPresent()) {
-			System.out.println("Stripped " + data.getString("id"));
 			// Prune items with health (living entities)
+			String id = data.getString("id");
+			synchronized(strippedMobs) {
+				Integer cnt = strippedMobs.get(id);
+				strippedMobs.put(id,  (cnt != null) ? (cnt+1) : 1);
+			}
 			return null;
 		}
 		return data;
 	}
+	
+	public static void dumpPrunedEntities() {
+		System.out.println("pruned entities:");
+		for (String k : strippedMobs.keySet()) {
+			System.out.println("  " + k + ": " + strippedMobs.get(k));	
+		}
+		System.out.println("=================================");
+	}
+
 }

@@ -10,6 +10,8 @@ import me.dags.converter.converter.directory.DirectoryConverter;
 import me.dags.converter.converter.directory.ExtentConverter;
 import me.dags.converter.converter.world.ChunkConverter;
 import me.dags.converter.converter.world.WorldConverter;
+import me.dags.converter.data.entity.ItemFrameConverter;
+import me.dags.converter.data.entity.PruneMobsConverter;
 import me.dags.converter.datagen.Mappings;
 import me.dags.converter.extent.Format;
 import me.dags.converter.util.IO;
@@ -62,6 +64,8 @@ public class Main {
                 GUIConverter.run();
             }
             ChunkConverter.dumpCounters();
+            ItemFrameConverter.dumpMissingItemFrames();
+            PruneMobsConverter.dumpPrunedEntities();
         } catch (Throwable t) {
             t.printStackTrace();
         }

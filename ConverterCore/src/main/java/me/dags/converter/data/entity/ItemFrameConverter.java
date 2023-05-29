@@ -9,6 +9,7 @@ import me.dags.converter.util.Utils;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.jnbt.CompoundTag;
 
@@ -1786,6 +1787,8 @@ public class ItemFrameConverter implements EntityConverter {
 
 	private static final byte[] facingmap = { 3, 4, 2, 5 };
 
+	public static HashMap<String, Integer> missingMapping = new HashMap<String, Integer>();
+	
 	@Override
 	public CompoundTag convert(CompoundTag data) {
 		// System.out.println("item_frame.convert(" + data.toString() + ")");
@@ -1799,10 +1802,21 @@ public class ItemFrameConverter implements EntityConverter {
 				item.put("id", newitm);
 			}
 			else {
-				System.out.println("No item mapping for " + itmid);
+				synchronized (missingMapping) {
+					Integer cnt = missingMapping.get(itmid);
+					missingMapping.put(itmid, (cnt != null) ? (cnt+1) : 1);
+				}
 			}
 		}
 		data.put("Facing", facingmap[data.getByte("Facing")]);
 		return data;
+	}
+	
+	public static void dumpMissingItemFrames() {
+		System.out.println("missing mappings for item_frames:");
+		for (String k : missingMapping.keySet()) {
+			System.out.println("  " + k + " (" + missingMapping.get(k) + " instances)");	
+		}
+		System.out.println("=================================");
 	}
 }
