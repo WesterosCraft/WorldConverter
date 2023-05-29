@@ -1766,6 +1766,12 @@ public class ItemFrameConverter implements EntityConverter {
 		itemIDMapping.put("minecraft:leather_chestplate:0", "minecraft:leather_chestplate");
 		itemIDMapping.put("minecraft:leather_leggings:0", "minecraft:leather_leggings");
 		itemIDMapping.put("minecraft:leather_boots:0", "minecraft:leather_boots");
+		itemIDMapping.put("minecraft:skull:0", "westerosblocks:generic_head");
+		itemIDMapping.put("minecraft:skull:1", "westerosblocks:skull");
+		itemIDMapping.put("minecraft:skull:2", "westerosblocks:wight_head");
+		itemIDMapping.put("minecraft:skull:3", "westerosblocks:helmet");
+		itemIDMapping.put("minecraft:skull:4", "westerosblocks:cabbage");
+		itemIDMapping.put("minecraft:skull:5", "minecraft:dragon_head");
 	}
 
 	public ItemFrameConverter(RemappingRegistry<BlockState> registry) {
