@@ -1,5 +1,6 @@
 package me.dags.converter.registry;
 
+import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.util.Utils;
 import me.dags.converter.util.log.Logger;
@@ -16,9 +17,9 @@ public class Mapper<T extends RegistryItem<T>> implements Registry.Mapper<T> {
     private final Map<T, T> mappings;
     private final Registry<T> registry;
 
-    private Mapper(String version, Registry<T> registry, Map<T, T> mappings) {
+    private Mapper(String version, Registry<T> toReg, Map<T, T> mappings) {
         this.version = version;
-        this.registry = registry;
+        this.registry = toReg;
         this.mappings = mappings;
     }
 
@@ -37,13 +38,22 @@ public class Mapper<T extends RegistryItem<T>> implements Registry.Mapper<T> {
         return version;
     }
 
-    public static <T extends RegistryItem<T>> Registry.Mapper<T> identity(Version version) {
+    @Override
+    public Registry<T> getOutRegistry()
+    {
+    	return registry;
+    }
+
+    public static <T extends RegistryItem<T>> Registry.Mapper<T> identity(Version version, final Registry<T> toreg) {
         return new Registry.Mapper<T>() {
             @Override
             public T apply(T in) {
                 return in;
             }
-
+            @Override
+            public Registry<T> getOutRegistry() {
+            	return toreg; 
+            }
             @Override
             public String getVersion() {
                 return version.getVersion();

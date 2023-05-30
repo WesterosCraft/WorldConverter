@@ -6,6 +6,7 @@ public class CustomData {
 
     public final FileRef blocks = new FileRef();
     public final FileRef biomes = new FileRef();
+    public final FileRef items = new FileRef();
     public final FileRef dataIn = new FileRef();
     public final FileRef dataOut = new FileRef();
 

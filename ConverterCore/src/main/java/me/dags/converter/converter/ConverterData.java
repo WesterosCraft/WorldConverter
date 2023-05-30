@@ -4,6 +4,7 @@ import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.converter.config.CustomData;
 import me.dags.converter.datagen.Mappings;
+import me.dags.converter.item.Item;
 import me.dags.converter.registry.Mapper;
 import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.resource.Container;
@@ -22,16 +23,19 @@ public class ConverterData {
     public final Version version;
     public final RemappingRegistry<Biome> biomes;
     public final RemappingRegistry<BlockState> blocks;
+    public final RemappingRegistry<Item> items;
 
-    public ConverterData(Version version, RemappingRegistry<BlockState> blocks, RemappingRegistry<Biome> biomes) {
+    public ConverterData(Version version, RemappingRegistry<BlockState> blocks, RemappingRegistry<Biome> biomes, RemappingRegistry<Item> items) {
         this.version = version;
         this.biomes = biomes;
         this.blocks = blocks;
+        this.items = items;
     }
 
     public static ConverterData create(CustomData config, Mappings mappings) throws Exception {
         apply(config.blocks.get(), mappings.getBlocks());
         apply(config.biomes.get(), mappings.getBiomes());
+        apply(config.items.get(), mappings.getItems());
         return mappings.build();
     }
 

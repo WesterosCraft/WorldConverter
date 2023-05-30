@@ -28,6 +28,8 @@ public interface Registry<T extends RegistryItem<T>> extends Iterable<T> {
      */
     T getValue(int id);
 
+    T getValue(String identifier);
+
     /**
      * Get the value parser for this registry
      */
@@ -64,6 +66,8 @@ public interface Registry<T extends RegistryItem<T>> extends Iterable<T> {
     interface Mapper<T extends RegistryItem<T>> {
 
         T apply(T in);
+        
+        Registry<T> getOutRegistry();
 
         String getVersion();
     }

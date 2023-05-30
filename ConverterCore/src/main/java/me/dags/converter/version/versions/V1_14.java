@@ -8,6 +8,8 @@ import me.dags.converter.biome.registry.BiomeRegistry;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.Serializer;
 import me.dags.converter.block.registry.BlockRegistry;
+import me.dags.converter.item.Item;
+import me.dags.converter.item.registry.ItemRegistry;
 import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.Version;
 import me.dags.converter.version.VersionData;
@@ -82,7 +84,13 @@ public class V1_14 implements Version {
             biomes.addUnchecked(biome.getId(), biome);
         }
 
-        return new VersionData(this, blocks.build(), biomes.build());
+        BiomeRegistry.Builder<Item> items = ItemRegistry.builder(getVersion());
+        for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject("items").entrySet()) {
+            Item itm = new Item(entry.getKey(), entry.getValue().getAsInt());
+            items.addUnchecked(itm.getId(), itm);
+        }
+
+        return new VersionData(this, blocks.build(), biomes.build(), items.build());
     }
 
     private static int countBlockStates(JsonObject json) {

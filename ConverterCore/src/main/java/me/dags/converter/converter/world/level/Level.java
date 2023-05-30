@@ -90,7 +90,7 @@ public class Level {
 
             Registry<Biome> biomes = syncBiomes(from.biomes, loadMappings(root, "minecraft:biomes"));
 
-            return new VersionData(from.version, blocks, biomes);
+            return new VersionData(from.version, blocks, biomes, from.items);
         }
     }
 

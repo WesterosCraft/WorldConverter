@@ -4,6 +4,7 @@ import me.dags.converter.util.Utils;
 import me.dags.converter.util.storage.IntMap;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -16,6 +17,7 @@ public abstract class AbstractRegistry<T extends RegistryItem<T>> implements Reg
     private final String version;
     protected final IntMap<T> idToVal;
     protected final Map<T, Integer> valToId;
+    protected final Map<String, T> identifierToVal;
 
     protected AbstractRegistry(Builder<T> builder) {
         this.idToVal = builder.idToVal;
@@ -23,6 +25,10 @@ public abstract class AbstractRegistry<T extends RegistryItem<T>> implements Reg
         this.version = builder.version;
         this.fallback = builder.fallback;
         this.maxId = builder.maxId;
+        this.identifierToVal = new HashMap<String, T>();
+        for (T itm : valToId.keySet()) {
+        	this.identifierToVal.put(itm.getIdentifier(), itm);
+        }
     }
 
     @Override
@@ -48,6 +54,11 @@ public abstract class AbstractRegistry<T extends RegistryItem<T>> implements Reg
     @Override
     public T getValue(int id) {
         return idToVal.getOrDefault(id, fallback);
+    }
+
+    @Override
+    public T getValue(String identifier) {
+        return identifierToVal.getOrDefault(identifier, fallback);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;
+import me.dags.converter.item.Item;
 import me.dags.converter.registry.Registry;
 import me.dags.converter.util.log.Logger;
 
@@ -17,11 +18,13 @@ public class VersionData {
     public final Version version;
     public final Registry<Biome> biomes;
     public final Registry<BlockState> blocks;
+    public final Registry<Item> items;
 
-    public VersionData(Version version, Registry<BlockState> blocks, Registry<Biome> biomes) {
+    public VersionData(Version version, Registry<BlockState> blocks, Registry<Biome> biomes, Registry<Item> items) {
         this.version = version;
         this.blocks = blocks;
         this.biomes = biomes;
+        this.items = items;
     }
 
     public static VersionData loadGameData(File file, Version version) throws Exception {

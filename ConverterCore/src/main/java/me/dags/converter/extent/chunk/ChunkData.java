@@ -58,7 +58,7 @@ public class ChunkData {
         List<DataConverter> list = new LinkedList<>();
         // Need to drop flower pots?
         if (to.getVersion().equals("1.15") || to.getVersion().equals("1.16") || to.getVersion().equals("1.17") || to.getVersion().equals("1.18")) {
-            list.add(EntityConverters.getNewDataConverter(data.blocks));
+            list.add(EntityConverters.getNewDataConverter(data.items));
         	list.add(TileEntityConverters.getNewConverters(data.blocks));
         }
         else {

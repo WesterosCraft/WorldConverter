@@ -4,6 +4,7 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.converter.DataConverter;
 import me.dags.converter.data.EntityConverter;
 import me.dags.converter.data.EntityDataConverter;
+import me.dags.converter.item.Item;
 import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.util.Utils;
 import me.dags.converter.util.log.Logger;
@@ -16,7 +17,7 @@ import org.jnbt.CompoundTag;
 
 public class ItemFrameConverter implements EntityConverter {
 
-	private final RemappingRegistry<BlockState> registry;
+	private final RemappingRegistry<Item> registry;
 
 	// Horrible hack, because I don't feel like writing more one time use converter
 	// code
@@ -1777,7 +1778,7 @@ public class ItemFrameConverter implements EntityConverter {
 		itemIDMapping.put("minecraft:skull:5", "minecraft:dragon_head");
 	}
 
-	public ItemFrameConverter(RemappingRegistry<BlockState> registry) {
+	public ItemFrameConverter(RemappingRegistry<Item> registry) {
 		this.registry = registry;
 	}
 
@@ -1788,7 +1789,7 @@ public class ItemFrameConverter implements EntityConverter {
 
 	private static final byte[] facingmap = { 3, 4, 2, 5 };
 
-	public static HashMap<String, Integer> missingMapping = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> badMapping = new HashMap<String, Integer>();
 	
 	@Override
 	public CompoundTag convert(CompoundTag data) {
@@ -1803,9 +1804,12 @@ public class ItemFrameConverter implements EntityConverter {
 				item.put("id", newitm);
 			}
 			else {
-				synchronized (missingMapping) {
-					Integer cnt = missingMapping.get(itmid);
-					missingMapping.put(itmid, (cnt != null) ? (cnt+1) : 1);
+				newitm = id;
+			}
+			if (registry.getOutput(newitm) == Item.NONE) {
+				synchronized (badMapping) {
+					Integer cnt = badMapping.get(itmid);
+					badMapping.put(newitm, (cnt != null) ? (cnt+1) : 1);
 				}
 			}
 		}
@@ -1814,9 +1818,9 @@ public class ItemFrameConverter implements EntityConverter {
 	}
 	
 	public static void dumpMissingItemFrames() {
-		Logger.log("missing mappings for item_frames:");
-		for (String k : missingMapping.keySet()) {
-			Logger.log("  " + k + " (" + missingMapping.get(k) + " instances)");	
+		Logger.log("bad item mappings for item_frames:");
+		for (String k : badMapping.keySet()) {
+			Logger.log("  " + k + " (" + badMapping.get(k) + " instances)");	
 		}
 		Logger.log("=================================");
 		Logger.flush();
