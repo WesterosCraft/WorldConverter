@@ -3,6 +3,7 @@ package me.dags.converter.datagen;
 import com.google.gson.stream.JsonWriter;
 import me.dags.converter.datagen.biome.BiomeData;
 import me.dags.converter.datagen.block.BlockData;
+import me.dags.converter.datagen.item.ItemData;
 import me.dags.converter.datagen.writer.DataWriter;
 import me.dags.converter.datagen.writer.JsonDataWriter;
 
@@ -42,6 +43,11 @@ public class GameDataWriter implements AutoCloseable {
     public SectionWriter<BlockData> startBlocks() throws IOException {
         ensureOpen();
         return new SectionWriter<>("blocks", writer, schema.block);
+    }
+
+    public SectionWriter<ItemData> startItems() throws IOException {
+        ensureOpen();
+        return new SectionWriter<>("items", writer, schema.item);
     }
 
     @Override

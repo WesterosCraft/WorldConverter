@@ -7,6 +7,7 @@ import me.dags.converter.datagen.SectionWriter;
 import me.dags.converter.datagen.biome.BiomeData;
 import me.dags.converter.datagen.block.BlockData;
 import me.dags.converter.datagen.block.StateData;
+import me.dags.converter.datagen.item.ItemData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDoor;
@@ -27,6 +28,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
@@ -90,6 +92,11 @@ public class Scraper {
                     section.write(geBiomeData(biome));
                 }
             }
+            try (SectionWriter<ItemData> section = writer.startItems()) {
+                for (Item item : ForgeRegistries.ITEMS) {
+                    section.write(geItemData(item));
+                }
+            }
             String val = "downsolidids=";
             for (String s : downsolidids) {
             	val += "\"" + s + "\",";
@@ -115,7 +122,11 @@ public class Scraper {
     private static BiomeData geBiomeData(Biome biome) {
         return new BiomeData(biome.getRegistryName(), Biome.getIdForBiome(biome));
     }
-    
+
+    private static ItemData geItemData(Item itm) {
+        return new ItemData(itm.getRegistryName(), Item.getIdFromItem(itm));
+    }
+
     public static class NullWorld implements IBlockAccess {
 		@Override
 		public TileEntity getTileEntity(BlockPos pos) {

@@ -6,7 +6,8 @@ import me.dags.converter.datagen.SectionWriter;
 import me.dags.converter.datagen.biome.BiomeData;
 import me.dags.converter.datagen.block.BlockData;
 import me.dags.converter.datagen.block.StateData;
-import net.minecraft.world.level.biome.Biome;
+import me.dags.converter.datagen.item.ItemData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -137,6 +138,11 @@ public class Scraper {
 					section.write(new BiomeData(rk, bipmes115.get(rk)));
 				}
 			}
+            try (SectionWriter<ItemData> section = writer.startItems()) {
+                for (Item item : ForgeRegistries.ITEMS) {
+                    section.write(geItemData(item));
+                }
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,6 +155,10 @@ public class Scraper {
 	// ((net.minecraftforge.registries.ForgeRegistry<Biome>)net.minecraftforge.registries.ForgeRegistries.BIOMES).getID(biome);
 	// return new BiomeData(biome.getRegistryName(), id);
 	// }
+    private static ItemData geItemData(Item itm) {
+        return new ItemData(itm.getRegistryName(), 0);
+    }
+
 
 	private static BlockData getBlockData(Block block) {
 		StateData defaults = getStateData(block.defaultBlockState());
