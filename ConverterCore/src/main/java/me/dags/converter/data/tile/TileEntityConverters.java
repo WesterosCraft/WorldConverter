@@ -40,6 +40,7 @@ public class TileEntityConverters {
     	list.add(new ObsoleteTileConverter("minecraft:noteblock"));
     	list.add(new ObsoleteTileConverter("minecraft:furnace"));
     	list.add(new ObsoleteTileConverter("minecraft:lit_furnace"));
+    	list.add(new ObsoleteTileConverter("minecraft:bed"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_0"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_1"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_2"));
@@ -49,6 +50,11 @@ public class TileEntityConverters {
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_6"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_7"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_8"));
+    	list.add(new ObsoleteTileConverter("westerosblocks:wctileentitysound"));
+    	list.add(new ObsoleteTileConverter("minecraft:opframetileentity"));
+    	list.add(new ObsoleteTileConverter("minecraft:statues_playertileentity"));
+    	list.add(new ObsoleteTileConverter("minecraft:statues_tileentity"));
+    	
     	return new EntityListConverter("TileEntities", list);
     }
 
