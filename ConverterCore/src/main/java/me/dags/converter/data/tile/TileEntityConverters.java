@@ -40,7 +40,7 @@ public class TileEntityConverters {
     	list.add(new ObsoleteTileConverter("minecraft:noteblock"));
     	list.add(new ObsoleteTileConverter("minecraft:furnace"));
     	list.add(new ObsoleteTileConverter("minecraft:lit_furnace"));
-    	list.add(new ObsoleteTileConverter("minecraft:bed"));
+//    	list.add(new ObsoleteTileConverter("minecraft:bed"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_0"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_1"));
     	list.add(new ObsoleteTileConverter("westerosblocks:bed_block_2"));
