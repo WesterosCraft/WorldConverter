@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ChunkConverter implements Converter {
 
@@ -57,16 +59,14 @@ public class ChunkConverter implements Converter {
         }
     }
     
-    private static class Count { long cnt; }
-    public static HashMap<String, Count> counters_by_state = new HashMap<String, Count>();
-    
+    public static ConcurrentHashMap<String, AtomicInteger> counters_by_state = new ConcurrentHashMap<String, AtomicInteger>();
     public static void dumpCounters() {
     	Set<String> keys = counters_by_state.keySet();
     	String[] keylist = keys.toArray(new String[0]);
     	Arrays.sort(keylist);
     	Logger.log("Output block counts by blockName:");
     	for (String key : keylist) {
-    		Logger.log(key + ", " + counters_by_state.get(key).cnt);
+    		Logger.log(key + ", " + counters_by_state.get(key));
     	}
     	Logger.flush();
     }
@@ -100,16 +100,8 @@ public class ChunkConverter implements Converter {
                     }
                     if (stateOut != null) {
                         String id = stateOut.getBlockName();
-                        if (!id.equals("minecraft:air")) {
-                        	Count cnt = counters_by_state.get(id);
-                        	if (cnt != null) { 
-                        		cnt.cnt += 1; 
-                    		}
-                        	else { 
-                        		cnt = new Count(); 
-                        		cnt.cnt = 1;
-                        		counters_by_state.put(id, cnt);   
-                        	}
+                        if ((id != null) && (!id.equals("minecraft:air"))) {
+                        	counters_by_state.computeIfAbsent(id, k -> new AtomicInteger()).getAndIncrement();
                         }
                     }
                     writer.setState(x, y, z, stateOut);

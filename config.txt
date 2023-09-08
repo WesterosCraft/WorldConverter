@@ -1,7 +1,7 @@
 # A world folder, a folder containing schematic/structure files,
 # or an individual schematic/structure file
-file=/Users/michaelprimm/forge-1.12.2/Westeros
-output_file= /Users/michaelprimm/forge-1.12.2/Westeros-converted
+file=/Users/michaelprimm/westeros-1.12.2/Westeros
+output_file= /Users/michaelprimm/westeros-1.12.2/Westeros-converted
 
 # The format and version of the world/schematic(s)/structure(s) [optional]
 input_format=world
@@ -12,7 +12,7 @@ output_format=world
 output_version=1.18
 
 # The paths to your custom GameData json files [optional]
-data_in=/Users/michaelprimm/forge-1.12.2/game_data.json
+data_in=/Users/michaelprimm/westeros-1.12.2/game_data.json
 data_out=/Users/michaelprimm/westeros-1.18.2/game_data.json
 
 # The paths to your custom mapping files, or directories containing mapping files [optional]
