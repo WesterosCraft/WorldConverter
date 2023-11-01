@@ -12,9 +12,9 @@ output_format=world
 output_version=1.18
 
 # The paths to your custom GameData json files [optional]
-data_in=/Users/michaelprimm/westeros-1.12.2/game_data.json
-data_out=/Users/michaelprimm/westeros-1.18.2/game_data.json
+data_in=
+data_out=
 
 # The paths to your custom mapping files, or directories containing mapping files [optional]
-block_mappings=/Users/michaelprimm/westeros-1.18.2/config/westerosblocks/blocks_1.12-1.18__westerosblocks.txt
+block_mappings=
 biome_mappings=
